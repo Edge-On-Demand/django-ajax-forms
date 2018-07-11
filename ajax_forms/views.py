@@ -10,7 +10,7 @@ from functools import update_wrapper
 
 import collections
 
-from six import string_types, text_type
+from six import string_types, text_type, with_metaclass
 
 from django import forms
 from django.conf import settings
@@ -1334,7 +1334,7 @@ class SubclassTracker(type(ModelForm)):
         super(SubclassTracker, cls).__init__(name, bases, dct)
 
 
-class BaseAjaxModelForm(ModelForm, metaclass=SubclassTracker):
+class BaseAjaxModelForm(with_metaclass(SubclassTracker, ModelForm)):
     required_fields = ()
 
     ajax_getters = ()
