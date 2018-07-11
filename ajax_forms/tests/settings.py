@@ -1,28 +1,17 @@
-# Django settings for ajax_forms project.
-
 import os
-#import sys
 
-#sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-#PROJECT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))
 PROJECT_DIR = os.path.dirname(__file__)
 
 DEBUG = True
 
-ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
-)
-
-MANAGERS = ADMINS
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'example_project.db',                      # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'example_project.db',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': ''
     }
 }
 
@@ -83,8 +72,7 @@ STATICFILES_DIRS = (
 # various locations.
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder'
 )
 
 # Make this unique, and don't share it with anybody.
@@ -95,15 +83,10 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware'
 )
 
 ROOT_URLCONF = 'ajax_forms.tests.urls'
-
-# Python dotted path to the WSGI application used by Django's runserver.
-#WSGI_APPLICATION = 'example_project.wsgi.application'
-
-print('PROJECT_DIR:', PROJECT_DIR)
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -113,11 +96,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ajax_forms',
-    'ajax_forms.tests',
-    # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
-    # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
+    'ajax_forms.tests'
 )
 
 # A sample logging configuration. The only tangible logging
@@ -144,8 +123,8 @@ LOGGING = {
         'django.request': {
             'handlers': ['mail_admins'],
             'level': 'ERROR',
-            'propagate': True,
-        },
+            'propagate': True
+        }
     }
 }
 
@@ -159,9 +138,8 @@ TEMPLATES = [
             # Don't forget to use absolute paths, not relative paths.
             '%s/templates' % PROJECT_DIR,
             '%s/../templates' % PROJECT_DIR,
-            '%s/../static' % PROJECT_DIR,
+            '%s/../static' % PROJECT_DIR
         ],
-#         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.contrib.auth.context_processors.auth',
@@ -171,13 +149,13 @@ TEMPLATES = [
                 'django.template.context_processors.media',
                 'django.template.context_processors.static',
                 'django.template.context_processors.tz',
-                'django.contrib.messages.context_processors.messages',
+                'django.contrib.messages.context_processors.messages'
             ],
             'loaders': [
                 'django.template.loaders.filesystem.Loader',
-                'django.template.loaders.app_directories.Loader',
+                'django.template.loaders.app_directories.Loader'
             ],
-            'debug': DEBUG,
-        },
-    },
+            'debug': DEBUG
+        }
+    }
 ]

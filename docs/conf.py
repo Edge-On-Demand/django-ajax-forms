@@ -11,8 +11,6 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
-import sys, os
-
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
@@ -40,8 +38,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'django-ajax-form-mixin'
-copyright = u'2012, Jonas Geiregat'
+project = 'django-ajax-form-mixin'
+copyright = '2012, Jonas Geiregat'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -183,8 +181,8 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'django-ajax-form-mixin.tex', u'django-ajax-form-mixin Documentation',
-   u'Jonas Geiregat', 'manual'),
+  ('index', 'django-ajax-form-mixin.tex', 'django-ajax-form-mixin Documentation',
+   'Jonas Geiregat', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -213,8 +211,8 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'django-ajax-form-mixin', u'django-ajax-form-mixin Documentation',
-     [u'Jonas Geiregat'], 1)
+    ('index', 'django-ajax-form-mixin', 'django-ajax-form-mixin Documentation',
+     ['Jonas Geiregat'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -227,8 +225,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'django-ajax-form-mixin', u'django-ajax-form-mixin Documentation',
-   u'Jonas Geiregat', 'django-ajax-form-mixin', 'One line description of project.',
+  ('index', 'django-ajax-form-mixin', 'django-ajax-form-mixin Documentation',
+   'Jonas Geiregat', 'django-ajax-form-mixin', 'One line description of project.',
    'Miscellaneous'),
 ]
 
@@ -245,10 +243,10 @@ texinfo_documents = [
 # -- Options for Epub output ---------------------------------------------------
 
 # Bibliographic Dublin Core info.
-epub_title = u'django-ajax-form-mixin'
-epub_author = u'Jonas Geiregat'
-epub_publisher = u'Jonas Geiregat'
-epub_copyright = u'2012, Jonas Geiregat'
+epub_title = 'django-ajax-form-mixin'
+epub_author = 'Jonas Geiregat'
+epub_publisher = 'Jonas Geiregat'
+epub_copyright = '2012, Jonas Geiregat'
 
 # The language of the text. It defaults to the language option
 # or en if the language is not set.

@@ -1,8 +1,7 @@
-from __future__ import print_function
-
 import re
 
 from django.contrib.admin.filters import FieldListFilter
+
 
 def TitledListFilter(title, list_filter_class=FieldListFilter):
     """

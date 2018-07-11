@@ -3,8 +3,8 @@ from django.test import TestCase
 
 from .forms import ContactForm
 
-class AjaxFormViewTest(TestCase):
 
+class AjaxFormViewTest(TestCase):
     urls = 'ajax_forms.tests.urls'
 
     def test_basic_initial(self):

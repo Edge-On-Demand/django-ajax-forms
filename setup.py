@@ -5,6 +5,7 @@ import ajax_forms
 
 CURRENT_DIR = os.path.abspath(os.path.dirname(__file__))
 
+
 def get_reqs(*fns):
     lst = []
     for fn in fns:
@@ -14,6 +15,7 @@ def get_reqs(*fns):
                 continue
             lst.append(package.strip())
     return lst
+
 
 setup(
     name='django-ajax-forms-mega',
@@ -35,7 +37,6 @@ setup(
             'static/*/*/*.*',
         ],
     },
-    #https://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Environment :: Web Environment',
@@ -43,9 +44,9 @@ setup(
         'License :: OSI Approved :: BSD License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
-        'Framework :: Django',
+        'Framework :: Django'
     ],
     zip_safe=False,
     install_requires=get_reqs('requirements-min-django.txt', 'requirements.txt'),
-    tests_require=get_reqs('requirements-test.txt'),
+    tests_require=get_reqs('requirements-test.txt')
 )
