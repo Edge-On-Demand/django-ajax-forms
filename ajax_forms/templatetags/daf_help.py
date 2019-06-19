@@ -3,7 +3,7 @@ import re
 from django import template
 from django.contrib.admin.templatetags.admin_list import result_headers, result_hidden_fields, results
 from django.contrib.admin.views.main import ALL_VAR, PAGE_VAR
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 from six import string_types
