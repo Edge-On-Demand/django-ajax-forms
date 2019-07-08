@@ -1158,7 +1158,7 @@ def handle_ajax_etter(request, model_name, action, attr_slug, pk):
                 field = form.Meta.model._meta.get_field(attr_name)
                 value = request.REQUEST['value']
                 if isinstance(field, models.ForeignKey):
-                    value = field.rel.to.objects.get(pk=value)
+                    value = field.remote_field.model.objects.get(pk=value)
                 elif isinstance(field, models.BooleanField):
                     value = bool(value.lower() in ('1', 'true', 'on'))
                 setattr(obj, attr_name, value)
@@ -1421,7 +1421,7 @@ class BaseAjaxModelForm(with_metaclass(SubclassTracker, ModelForm)):
             sf.parent_form_cls = type(self)
 
             fk_name_to_model = dict(
-                (f.name, f.rel.to)
+                (f.name, f.remote_field.model)
                 for f in sf.Meta.model._meta.fields
                 if isinstance(f, models.ForeignKey)
             )  # {name:model}
@@ -1658,7 +1658,7 @@ class BaseAjaxModelForm(with_metaclass(SubclassTracker, ModelForm)):
                 value = value[0]
 
             if isinstance(field, models.ForeignKey):
-                value = field.rel.to.objects.get(pk=value)
+                value = field.remote_field.model.objects.get(pk=value)
             elif isinstance(field, models.BooleanField):
                 value = bool(value.lower() in ('1', 'true', 'on'))
 
