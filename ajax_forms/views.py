@@ -1,5 +1,3 @@
-from __future__ import print_function, unicode_literals
-
 import json
 import re
 import uuid
@@ -28,7 +26,6 @@ from django.contrib.admin.views.main import SEARCH_VAR
 from django.contrib.contenttypes import views as contenttype_views
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import PermissionDenied
-from django.core.urlresolvers import reverse
 from django.db import models
 from django.db import transaction, router
 from django.db.models import Q
@@ -41,6 +38,7 @@ from django.http import HttpResponseRedirect
 from django.template import Context, Template
 from django.template.loader import render_to_string, get_template
 from django.template.response import SimpleTemplateResponse, TemplateResponse
+from django.urls import reverse
 from django.utils import six
 from django.utils.encoding import force_text
 from django.utils.html import escape, escapejs
@@ -61,13 +59,6 @@ from ajax_forms.templatetags.daf_help import sort_link, clean_title
 SLUG_TO_FORM_REGISTRY = {}
 
 FORM_SUBMITTED = "valid_submit"
-
-try:
-    # >= Django 1.8
-    commit_on_success = transaction.atomic
-except AttributeError:
-    # < Django 1.8
-    commit_on_success = transaction.commit_on_success
 
 
 # We need to monkeypatch Changelist.url_for_result because it hardcodes
@@ -624,7 +615,7 @@ class ModelView(ModelAdmin):
         return initial
 
     @csrf_protect_m
-    @commit_on_success
+    @transaction.atomic
     def add_view(self, request, form_url='', extra_context=None):
         "The 'add' admin view for this model."
         model = self.model
@@ -705,7 +696,7 @@ class ModelView(ModelAdmin):
         return self.render_change_form(request, context, form_url=form_url, add=True)
 
     @csrf_protect_m
-    @commit_on_success
+    @transaction.atomic
     def change_view(self, request, object_id, form_url='', extra_context=None):
         "The 'change' admin view for this model."
         model = self.model
@@ -962,7 +953,7 @@ class ModelView(ModelAdmin):
         ], context)
 
     @csrf_protect_m
-    @commit_on_success
+    @transaction.atomic
     def delete_view(self, request, object_id, extra_context=None):
         "The 'delete' admin view for this model."
         opts = self.model._meta
@@ -1167,7 +1158,7 @@ def handle_ajax_etter(request, model_name, action, attr_slug, pk):
                 field = form.Meta.model._meta.get_field(attr_name)
                 value = request.REQUEST['value']
                 if isinstance(field, models.ForeignKey):
-                    value = field.rel.to.objects.get(pk=value)
+                    value = field.remote_field.model.objects.get(pk=value)
                 elif isinstance(field, models.BooleanField):
                     value = bool(value.lower() in ('1', 'true', 'on'))
                 setattr(obj, attr_name, value)
@@ -1430,7 +1421,7 @@ class BaseAjaxModelForm(with_metaclass(SubclassTracker, ModelForm)):
             sf.parent_form_cls = type(self)
 
             fk_name_to_model = dict(
-                (f.name, f.rel.to)
+                (f.name, f.remote_field.model)
                 for f in sf.Meta.model._meta.fields
                 if isinstance(f, models.ForeignKey)
             )  # {name:model}
@@ -1667,7 +1658,7 @@ class BaseAjaxModelForm(with_metaclass(SubclassTracker, ModelForm)):
                 value = value[0]
 
             if isinstance(field, models.ForeignKey):
-                value = field.rel.to.objects.get(pk=value)
+                value = field.remote_field.model.objects.get(pk=value)
             elif isinstance(field, models.BooleanField):
                 value = bool(value.lower() in ('1', 'true', 'on'))
 
